@@ -11,9 +11,25 @@ def some_function():
 
     print "This is global SOME_NUMBER updated inside some_function: %s" % SOME_NUMBER
 
+
     other_number = 20
 
     print "This is other_number defined inside some_function: %s" % other_number
+
+    # this throws an UnboundLocalError
+    def inner_function():
+        print "This is updating other_number in inner_function:"
+        other_number += 1
+
+    try:
+        print "\n"
+        print "Calling inner_function() will throw an exception because other_number is not passed to it"
+        print "-"*40
+        inner_function()
+    except UnboundLocalError:
+        print "Yup! Welcome to the except block."
+        print "other_number is not accessible in inner_function"
+
 
     return None
 
@@ -35,12 +51,20 @@ def another_function():
 
 
 if __name__ == "__main__":
+
+
+    print "-"*40
+    print "Python Scoping Demo"
+    print "-"*40
+    
     print "This is the global variable SOME_NUMBER, initially: %s" % SOME_NUMBER
     print "\n"
 
     print "Calling some_function():"
+    print "-"*40
     some_function()
     print "\n"
 
     print "Calling another_function():"
+    print "-"*40
     another_function()
